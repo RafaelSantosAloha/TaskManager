@@ -3,6 +3,8 @@ const bodyParser = require('body-parser');
 const mariadb = require('mariadb');
 const app = express();
 const PORT = 3001;
+const cors = require("cors");
+app.use(cors());
 
 app.use(bodyParser.json());
 
@@ -11,7 +13,7 @@ const pool = mariadb.createPool({
     user: 'root',
     password: 'aloha',
     database: 'task_manager',
-    connectionLimit: 5
+    connectionLimit: 100
 });
 
 app.post('/tasks', async (req, res) => {
