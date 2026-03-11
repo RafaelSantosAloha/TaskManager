@@ -4,7 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node frontend/src/index.js",
+    "backend": "cd backend && npm start",
+    "frontend": "cd frontend && npm start",
+    "dev": "concurrently \"npm run backend\" \"npm run frontend\"",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -18,5 +20,8 @@
   "bugs": {
     "url": "https://github.com/RafaelSantosAloha/TaskManager/issues"
   },
-  "homepage": "https://github.com/RafaelSantosAloha/TaskManager#readme"
+  "homepage": "https://github.com/RafaelSantosAloha/TaskManager#readme",
+  "devDependencies": {
+    "concurrently": "^9.2.1"
+  }
 }
