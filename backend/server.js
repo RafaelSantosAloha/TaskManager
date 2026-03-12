@@ -49,6 +49,17 @@ app.delete('/tasks/:id', async (req, res) => {
     }
 });
 
+app.put('/tasks/:id', async (req, res) => {
+    const { id } = req.params;
+    const { title, description } = req.body;
+    try {
+        const conn = await pool.getConnection();
+        await conn.query('UPDATE tasks SET title = ?, description = ? WHERE id = ?', [title, description, id]);
+        res.status(200).send({ message: 'Tarefa atualizada' });
+    } catch (err) {
+        res.status(500).send(err);
+    }   
+});
 
 app.listen(PORT, () => {
     console.log(`Servidor a correr na porta ${PORT}`);

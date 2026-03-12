@@ -13,13 +13,24 @@ const TaskList = () => {
   return (
     <div>
       <h1>Lista de Tarefas</h1>
-      <ul>
-        {tasks.map(task => (
-          <li key={task.id}>
-             {task.id} - {task.title}: {task.description}
-          </li>
-        ))}
-      </ul>
+      <table>
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Título</th>
+            <th>Descrição</th>
+          </tr>
+        </thead>
+        <tbody>
+          {tasks.map(task => (
+            <tr key={task.id}>
+              <td>{task.id}</td>
+              <td>{task.title}</td>
+              <td>{task.description}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
     </div>
   );
 };

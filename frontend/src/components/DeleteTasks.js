@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
-const DeleteTasks = () => {
+function DeleteTasks(){
   const [tasks, setTasks] = useState([]);
 
   useEffect(() => {
@@ -10,10 +10,12 @@ const DeleteTasks = () => {
       .catch(err => console.error(err));
   }, []);
 
+
+
   const handleDelete = (id) => {
-    const confirm = window.confirm("Tem certeza que deseja deletar esta tarefa?");
+    const confirm = window.confirm("Tem certeza que deseja eliminar esta tarefa?");
     if (confirm) {
-      axios.delete(`http://localhost:3001/tasks/:id`, { data: { id } })
+      axios.delete(`http://localhost:3001/tasks/${id}`, { id })
         .then(() => {
           setTasks(tasks.filter(tasks => tasks.id !== id));
           alert("Tarefa Eliminada");
@@ -24,18 +26,34 @@ const DeleteTasks = () => {
 
   return (
     <div>
-      <h1>Deletar Tarefa</h1>
-        <ul>
+      <h1>Eliminar Tarefa</h1>
+        <table>
+          <thead>
+          <tr>
+            <th>ID</th>
+            <th>Título</th>
+            <th>Descrição</th>
+            <th>Botão</th>
+          </tr>
+        </thead>
+        <tbody>
+
             {tasks.map(task => (
-                <li key={task.id}>
-                    {task.id} - {task.title}: {task.description}
-                    <button onClick={() => handleDelete(task.id)}>Eliminar Tarefa</button>
-                </li>
+                <tr key={task.id}>
+                    <td>{task.id}</td>
+                    <td>{task.title}</td>
+                    <td>{task.description}</td>
+                    <td>
+                        <button onClick={() => handleDelete(task.id)}>Eliminar Tarefa</button>
+                    </td>
+                </tr>
             ))}
-        </ul>
+        </tbody>
+        </table>
     </div>  
   );
 
 };
+
 
 export default DeleteTasks;
