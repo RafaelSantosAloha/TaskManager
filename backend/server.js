@@ -38,6 +38,18 @@ app.get('/tasks', async (req, res) => {
     }
 });
 
+app.delete('/tasks/:id', async (req, res) => {
+    const { id } = req.params;
+    try {
+        const conn = await pool.getConnection();
+        await conn.query('DELETE FROM tasks WHERE id = ?', [id]);
+        res.status(200).send({ message: 'Tarefa eliminada' });
+    } catch (err) {
+        res.status(500).send(err);
+    }
+});
+
+
 app.listen(PORT, () => {
     console.log(`Servidor a correr na porta ${PORT}`);
 });
