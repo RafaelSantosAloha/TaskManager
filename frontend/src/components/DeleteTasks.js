@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import Logo from './Logo1.png';
 
 function DeleteTasks(){
   const [tasks, setTasks] = useState([]);
@@ -26,6 +27,7 @@ function DeleteTasks(){
 
   return (
     <div>
+      <img src={Logo} alt="Logo" className='Logo' />  
       <h1>Eliminar Tarefa</h1>
         <table>
           <thead>
@@ -44,7 +46,7 @@ function DeleteTasks(){
                     <td>{task.title}</td>
                     <td>{task.description}</td>
                     <td>
-                        <button onClick={() => handleDelete(task.id)}>Eliminar Tarefa</button>
+                        <button class="delete-btn" onClick={() => handleDelete(task.id)}>Eliminar Tarefa</button>
                     </td>
                 </tr>
             ))}

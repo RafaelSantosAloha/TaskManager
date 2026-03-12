@@ -55,6 +55,36 @@ button{
   transition:0.2s;
 }
 
+.add-container {
+  display: flex;
+  justify-content: center;
+  margin: 20px 0;
+}
+
+button.add-btn{
+  background:#28a745;
+}
+
+button.update-btn{
+  background:#ff7b00;
+}
+
+button.delete-btn{
+  background:#fe1900;
+}
+
+.refresh-container {
+  display: flex;
+  justify-content: center;
+  margin: 20px 0;
+}
+
+button.refresh-btn{
+  background:#2d7282;
+  display: "flex";
+  justify-Content: "center";
+}
+
 button:hover{
   background:#555;
 }
@@ -83,7 +113,7 @@ button:hover{
 }
 
 .delete-btn{
-  background:#e74c3c;
+  background:#fe1900;
 }
 
 .delete-btn:hover{
@@ -98,6 +128,7 @@ table{
   border-radius:8px;
   overflow:hidden;
   box-shadow:0 2px 8px rgba(0,0,0,0.05);
+  table-layout: fixed;
 }
 
 thead{
@@ -131,3 +162,12 @@ td:first-child{
   color:#555;
   width:60px;
 }
+
+.Logo {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  width: 70px;
+  height: auto;
+}
+

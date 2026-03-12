@@ -1,18 +1,26 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-
+import Logo from './Logo1.png';
 const TaskList = () => {
   const [tasks, setTasks] = useState([]);
 
-  useEffect(() => {
+  const fetchTasks = () => {
     axios.get("http://localhost:3001/tasks")
       .then(res => setTasks(res.data))
       .catch(err => console.error(err));
+  };
+
+  useEffect(() => {
+    fetchTasks();
   }, []);
 
   return (
     <div>
+      <img src={Logo} alt="Logo" className='Logo' />
       <h1>Lista de Tarefas</h1>
+    <div className="refresh-container">
+      <button className="refresh-btn" onClick={fetchTasks}> Atualizar Lista</button>
+    </div>
       <table>
         <thead>
           <tr>

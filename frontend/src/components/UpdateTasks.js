@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import Logo from './Logo1.png';
 
 function UpdateTask() {
     const [tasks, setTasks] = useState([]); 
@@ -13,6 +14,10 @@ function UpdateTask() {
   }, []);
 
     const handleUpdate = (id) => {
+        if (!title || !description) {
+            alert("Preencha todos os campos");
+            return;
+        }
     const confirm = window.confirm("Tem certeza que deseja atualizar esta tarefa?");
     if (confirm) {
       axios.put(`http://localhost:3001/tasks/${id}`, { title, description })
@@ -28,6 +33,7 @@ function UpdateTask() {
 
   return (
     <div>
+        <img src={Logo} alt="Logo" className='Logo' />
       <h1>Atualizar Tarefa</h1>
       <textarea
         placeholder="Título"
@@ -45,7 +51,7 @@ function UpdateTask() {
             <th>ID</th>
             <th>Título</th>
             <th>Descrição</th>
-            <th>Botão</th>
+            <th>Botão Atualizar</th>
           </tr>
         </thead>
         <tbody>
@@ -55,7 +61,7 @@ function UpdateTask() {
               <td>{task.title}</td>
               <td>{task.description}</td>
               <td>
-                <button onClick={() => handleUpdate(task.id)}>Atualizar Tarefa</button>
+                <button class = "update-btn" onClick ={() => handleUpdate(task.id)}>Atualizar Tarefa</button>
               </td>
             </tr>
           ))}

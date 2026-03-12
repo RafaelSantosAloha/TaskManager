@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import Logo from './Logo1.png';
 
 function AddTask() {
   const [title, setTitle] = useState('');
@@ -7,7 +8,7 @@ function AddTask() {
 
   const alertAddTask = () => {
     if (!title || !description) {
-      alert("Preencha todos os campos!");
+      alert("Preencha todos os campos");
       return;
     }
 
@@ -22,6 +23,7 @@ function AddTask() {
 
   return (
     <div>
+      <img src={Logo} alt="Logo" className='Logo' />
       <h1>Adicionar Tarefa</h1>
       <textarea
         placeholder="Título"
@@ -33,7 +35,9 @@ function AddTask() {
         value={description}
         onChange={(e) => setDescription(e.target.value)}
       ></textarea>
-      <button onClick={alertAddTask}>Adicionar Tarefa</button>
+      <div className="add-container">
+       <button className="add-btn" onClick={alertAddTask}>Adicionar Tarefa</button>
+    </div>
     </div>
   );
 }
