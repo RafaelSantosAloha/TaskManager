@@ -7,12 +7,16 @@ function UpdateTask() {
     const [title, setTitle] = useState('');
     const [description, setDescription] = useState('');
 
-  useEffect(() => {
+    const fetchTasks = () => {
     axios.get("http://localhost:3001/tasks")
       .then(res => setTasks(res.data))
       .catch(err => console.error(err));
-  }, []);
+  };
 
+  useEffect(() => {
+    fetchTasks();
+  }, []);
+  
     const handleUpdate = (id) => {
         if (!title || !description) {
             alert("Preencha todos os campos");
@@ -45,6 +49,9 @@ function UpdateTask() {
         value={description}
         onChange={(e) => setDescription(e.target.value)}
       ></textarea>
+      <div className="refresh-container">
+      <button className="refresh-btn" onClick={fetchTasks}> Atualizar Lista</button>
+    </div>
       <table>
         <thead>
           <tr>

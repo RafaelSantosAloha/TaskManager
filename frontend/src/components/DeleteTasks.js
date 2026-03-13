@@ -5,10 +5,13 @@ import Logo from './Logo1.png';
 function DeleteTasks(){
   const [tasks, setTasks] = useState([]);
 
-  useEffect(() => {
+  const fetchTasks = () => {
     axios.get("http://localhost:3001/tasks")
       .then(res => setTasks(res.data))
       .catch(err => console.error(err));
+  };
+  useEffect(() => {
+    fetchTasks();
   }, []);
 
 
@@ -29,6 +32,9 @@ function DeleteTasks(){
     <div>
       <img src={Logo} alt="Logo" className='Logo' />
       <h1>Eliminar Tarefa</h1>
+      <div className="refresh-container">
+      <button className="refresh-btn" onClick={fetchTasks}> Atualizar Lista</button>
+    </div>
         <table>
           <thead>
           <tr>
