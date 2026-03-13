@@ -33,7 +33,7 @@ function UpdateTask() {
 
   return (
     <div>
-        <img src={Logo} alt="Logo" className='Logo' />
+      <img src={Logo} alt="Logo" className='Logo' />
       <h1>Atualizar Tarefa</h1>
       <textarea
         placeholder="Título"

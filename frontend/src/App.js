@@ -5,6 +5,7 @@ import AddTask from "./components/AddTask";
 import DeleteTasks from "./components/DeleteTasks";
 import UpdateTask from "./components/UpdateTasks";
 import './App.css';
+import Rotas from "./components/rotas";
 
 function App() {
     
@@ -13,9 +14,10 @@ function App() {
         <Router>
             <Routes>
                 <Route path="/tasks" element={<TaskList />} />
-                <Route path="/" element={<AddTask />} />
+                <Route path="/add" element={<AddTask />} />
                 <Route path="/delete" element={<DeleteTasks />} />
                 <Route path="/update" element={<UpdateTask />} />
+                <Route path="/" element={<Rotas />} />
             </Routes>
         </Router>
     );

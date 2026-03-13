@@ -1,0 +1,213 @@
+{
+  "info": {
+    "_postman_id": "4b0ce1ae-ca83-4bd5-a7c1-47a7d5695ad5",
+    "name": "Tasks Manager",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "53041955",
+    "_collection_link": "https://go.postman.co/collection/53041955-4b0ce1ae-ca83-4bd5-a7c1-47a7d5695ad5?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "New Request",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:3001/tasks",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "3001",
+          "path": [
+            "tasks"
+          ]
+        },
+        "description": "Mostra todas as tarefas guardadas na base de dados."
+      },
+      "response": []
+    },
+    {
+      "name": "New Request",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n\"title\": \"Hora\",\r\n\"description\": \"Comer\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:3001/tasks",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "3001",
+          "path": [
+            "tasks"
+          ]
+        },
+        "description": "Cria uma nova tarefa na base de dados."
+      },
+      "response": []
+    },
+    {
+      "name": "New Request",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "var template = `\r",
+              "<style>\r",
+              "  body { font-family: Inter, Arial, sans-serif; padding: 12px; }\r",
+              "  .grid { display: grid; grid-template-columns: 1fr; gap: 14px; }\r",
+              "  table { border-collapse: collapse; width: 100%; }\r",
+              "  th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }\r",
+              "  th { background: #f6f7f9; }\r",
+              "  .muted { color: #666; font-size: 12px; }\r",
+              "</style>\r",
+              "\r",
+              "<div class=\"grid\">\r",
+              "  <div>\r",
+              "    <canvas id=\"taskChart\" height=\"90\"></canvas>\r",
+              "    <div class=\"muted\">Bars: id, title length, description length</div>\r",
+              "  </div>\r",
+              "\r",
+              "  <div>\r",
+              "    <table>\r",
+              "      <thead>\r",
+              "        <tr><th>Field</th><th>Value</th></tr>\r",
+              "      </thead>\r",
+              "      <tbody>\r",
+              "        <tr><td>id</td><td>{{task.id}}</td></tr>\r",
+              "        <tr><td>title</td><td>{{task.title}}</td></tr>\r",
+              "        <tr><td>description</td><td>{{task.description}}</td></tr>\r",
+              "      </tbody>\r",
+              "    </table>\r",
+              "  </div>\r",
+              "</div>\r",
+              "\r",
+              "<script src=\"https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js\"></script>\r",
+              "<script>\r",
+              "  pm.getData(function (err, data) {\r",
+              "    if (err) return;\r",
+              "\r",
+              "    var labels = [\"id\", \"title length\", \"description length\"];\r",
+              "    var values = [data.metrics.idValue, data.metrics.titleLength, data.metrics.descriptionLength];\r",
+              "\r",
+              "    var ctx = document.getElementById(\"taskChart\").getContext(\"2d\");\r",
+              "    new Chart(ctx, {\r",
+              "      type: \"bar\",\r",
+              "      data: {\r",
+              "        labels: labels,\r",
+              "        datasets: [{\r",
+              "          label: \"Task metrics\",\r",
+              "          data: values,\r",
+              "          backgroundColor: [\"#4C78A8\", \"#F58518\", \"#54A24B\"]\r",
+              "        }]\r",
+              "      },\r",
+              "      options: {\r",
+              "        responsive: true,\r",
+              "        legend: { display: false },\r",
+              "        scales: {\r",
+              "          yAxes: [{\r",
+              "            ticks: { beginAtZero: true, precision: 0 }\r",
+              "          }]\r",
+              "        }\r",
+              "      }\r",
+              "    });\r",
+              "  });\r",
+              "</script>\r",
+              "`;\r",
+              "\r",
+              "function constructVisualizerPayload() {\r",
+              "  var task = {};\r",
+              "  try {\r",
+              "    task = pm.response.json() || {};\r",
+              "  } catch (e) {\r",
+              "    task = {};\r",
+              "  }\r",
+              "\r",
+              "  var idValue = (typeof task.id === \"number\") ? task.id : 0;\r",
+              "  var title = (typeof task.title === \"string\") ? task.title : \"\";\r",
+              "  var description = (typeof task.description === \"string\") ? task.description : \"\";\r",
+              "\r",
+              "  return {\r",
+              "    task: {\r",
+              "      id: (task.id !== undefined ? String(task.id) : \"\"),\r",
+              "      title: title,\r",
+              "      description: description\r",
+              "    },\r",
+              "    metrics: {\r",
+              "      idValue: idValue,\r",
+              "      titleLength: title.length,\r",
+              "      descriptionLength: description.length\r",
+              "    }\r",
+              "  };\r",
+              "}\r",
+              "\r",
+              "pm.visualizer.set(template, constructVisualizerPayload());"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "PUT",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n\"title\": \"Hora de almço\",\r\n\"description\": \"Comer\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:3001/tasks/4",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "3001",
+          "path": [
+            "tasks",
+            "4"
+          ]
+        },
+        "description": "Atualiza uma tarefa existente através do ID."
+      },
+      "response": []
+    },
+    {
+      "name": "New Request",
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:3001/tasks/45",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "3001",
+          "path": [
+            "tasks",
+            "45"
+          ]
+        },
+        "description": "Elimina uma tarefa da base de dados através do ID."
+      },
+      "response": []
+    }
+  ]
+}

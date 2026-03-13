@@ -27,7 +27,7 @@ function DeleteTasks(){
 
   return (
     <div>
-      <img src={Logo} alt="Logo" className='Logo' />  
+      <img src={Logo} alt="Logo" className='Logo' />
       <h1>Eliminar Tarefa</h1>
         <table>
           <thead>

@@ -170,3 +170,31 @@ td:first-child{
   width: 70px;
   height: auto;
 }
+
+.navbar {
+  display: flex;
+  gap: 20px;
+  padding: 20px 25px;
+  background: #383737;
+  align-items: center;
+}
+
+.navbar a {
+  text-decoration: none;
+  color: #ddd;
+  font-size: 15px;
+  font-weight: 500;
+  padding: 6px 10px;
+  border-radius: 6px;
+  transition: 0.2s;
+}
+
+.navbar a:hover {
+  background: #444;
+  color: white;
+}
+
+.navbar a.active {
+  background: #28a745;
+  color: white;
+}
